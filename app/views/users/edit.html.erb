@@ -1,0 +1,29 @@
+<h2>Editing Book</h2>
+
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+<%= form_with model:@user, local:true do |f| %>
+
+  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
+
+  <%= f.attachment_field :profile_image %>
+  <%= attachment_image_tag @user, :profile_image, :fill, 300, 300, format: 'jpeg' %>
+  <h4>紹介</h4>
+  <%= f.text_area :introduction %>
+  
+  
+ <div class="form-group">
+    <input type="submit" name="commit" value="Update User" class="btn btn-success" data-disable-with="Update User">
+  </div>
+
+
+  <p><%= link_to "show", user_path(@user) %></p>
+  <p><%= link_to "back", users_path %></p>
+
+
+<% end %>

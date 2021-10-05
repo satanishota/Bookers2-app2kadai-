@@ -1,0 +1,58 @@
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-3">
+ <p><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg' %></p>
+ <p>aa<%= @user.introduction %></p>
+<div>
+  <h3><%= @user.name %></h3>
+
+    <p><%= link_to "プロフィール編集", edit_user_path(@user),class:"btn btn-outline-secondary btn-block fas fa-user-cog" %></p>
+
+
+  <% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+
+<% end %>
+</div>
+
+ <h1>New book</h1>
+<%= form_with model: @book, local:true do |f| %>
+
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <div class="form-group">
+    <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book">
+  </div>
+<% end %>
+
+    </div>
+
+
+<div class="col-md-8 offset-md-1">
+ <h1>show</h1>
+
+  <p>books</p>
+   <% @books.each do |book| %>
+  <div class="card-body">
+    <div class="row">
+      <div class="">
+        <p>感想：<%= book.body %></p>
+        <p><%= link_to "#{book.user.name} name",user_path(@user) , class:"text-dark" %></p>
+        <p><%= link_to "#{book.title} title",book_path(book) , class:"text-dark" %></p></p>
+      </div>
+    </div>
+  </div>
+   <% end %>
+    </div>
+
+</div>
+</div>
+
+
